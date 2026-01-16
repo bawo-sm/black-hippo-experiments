@@ -1,1 +1,1 @@
-# black-hippo-experiments
+# Eksperymenty z rozwiązaniami do BalckHippo
