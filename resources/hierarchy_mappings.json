@@ -1,0 +1,666 @@
+{
+  "main_to_sub": {
+    "Christmas": [
+      "Christmas Decorations",
+      "Christmas Figurines",
+      "Christmas Linen",
+      "Christmas Ornaments & Garlands"
+    ],
+    "Decoration": [
+      "Candles & Candle Holders",
+      "Clocks",
+      "Decoration Storage",
+      "Decorative Materials",
+      "Flower Pots & Vases",
+      "Garden Accessories",
+      "Home Accessories",
+      "Home Fragrances",
+      "Mirrors",
+      "Photo Frames",
+      "Unspecified",
+      "Wall Decoration"
+    ],
+    "Flowers & Plants": [
+      "Artificial Branches",
+      "Artificial Flowers",
+      "Artificial Plants",
+      "Artificial Trees",
+      "Bouquets",
+      "Dried Flowers",
+      "Unspecified"
+    ],
+    "Furniture": [
+      "Chairs",
+      "Sofas & Armchairs",
+      "Storage",
+      "Tables",
+      "Unspecified"
+    ],
+    "Garden & Pets": [
+      "Outdoor Decoration",
+      "Outdoor Furniture",
+      "Pet Accessories"
+    ],
+    "Home Textiles": [
+      "Bath Linen",
+      "Bed Linen",
+      "Blankets & Throws",
+      "Clothing & Accessories",
+      "Curtains",
+      "Cushions",
+      "Rugs",
+      "Soft Toys",
+      "Table & Kitchen Linen",
+      "Unspecified"
+    ],
+    "Lighting": [
+      "Ceiling Lamps",
+      "Decorative Lighting",
+      "Desk & Table Lamps",
+      "Floor Lamps",
+      "Lighting Accessories",
+      "Unspecified",
+      "Wall Lamps"
+    ],
+    "Tableware": [
+      "Cutlery",
+      "Dinnerware",
+      "Glassware",
+      "Serveware",
+      "Table & Kitchen Accessories",
+      "Unspecified",
+      "Wine & Bar Accessories"
+    ],
+    "Unspecified": [
+      "Unspecified"
+    ]
+  },
+  "sub_to_detail": {
+    "Artificial Branches": [
+      "Unspecified"
+    ],
+    "Artificial Flowers": [
+      "Unspecified"
+    ],
+    "Artificial Plants": [
+      "Unspecified"
+    ],
+    "Artificial Trees": [
+      "Unspecified"
+    ],
+    "Bath Linen": [
+      "Bath Towels"
+    ],
+    "Bed Linen": [
+      "Hot Water Bottles"
+    ],
+    "Blankets & Throws": [
+      "Unspecified"
+    ],
+    "Bouquets": [
+      "With Vase"
+    ],
+    "Candles & Candle Holders": [
+      "Candle Snuffers",
+      "Candles",
+      "Candlesticks",
+      "Hurricane Lights & Lanterns",
+      "LED Candles",
+      "Tealight Holders"
+    ],
+    "Ceiling Lamps": [
+      "Unspecified"
+    ],
+    "Chairs": [
+      "Bar Stools",
+      "Benches",
+      "Dining Chairs",
+      "Office Chairs",
+      "Stools"
+    ],
+    "Christmas Decorations": [
+      "Unspecified"
+    ],
+    "Christmas Figurines": [
+      "Unspecified"
+    ],
+    "Christmas Linen": [
+      "Unspecified"
+    ],
+    "Christmas Ornaments & Garlands": [
+      "Unspecified"
+    ],
+    "Clocks": [
+      "Table Clocks",
+      "Wall Clocks"
+    ],
+    "Clothing & Accessories": [
+      "Bags",
+      "Other"
+    ],
+    "Curtains": [
+      "Curtains"
+    ],
+    "Cushions": [
+      "Cushions & Cushion Covers",
+      "Floor Cushions",
+      "Unspecified"
+    ],
+    "Cutlery": [
+      "Salad Servers"
+    ],
+    "Decoration Storage": [
+      "Coat Racks",
+      "Jewellery Boxes",
+      "Storage Baskets",
+      "Storage Boxes",
+      "Storage Jars",
+      "Unspecified"
+    ],
+    "Decorative Lighting": [
+      "Decorative Lighting"
+    ],
+    "Decorative Materials": [
+      "Unspecified"
+    ],
+    "Desk & Table Lamps": [
+      "Unspecified"
+    ],
+    "Dinnerware": [
+      "Bowls",
+      "Egg Cups",
+      "Jars and accessories",
+      "Mugs",
+      "Plates",
+      "Serving Bowls"
+    ],
+    "Dried Flowers": [
+      "Unspecified"
+    ],
+    "Floor Lamps": [
+      "Unspecified"
+    ],
+    "Flower Pots & Vases": [
+      "Floor Vases",
+      "Flower pots",
+      "Soliflores",
+      "Vases"
+    ],
+    "Garden Accessories": [
+      "Bird Houses & Cages",
+      "Fire Pits, Braziers & Fireplaces",
+      "Parasols"
+    ],
+    "Glassware": [
+      "Bar Glasses",
+      "Champagne Glasses",
+      "Drinking Glasses",
+      "Wine Glasses"
+    ],
+    "Home Accessories": [
+      "Decorative Objects",
+      "Figurines",
+      "Other",
+      "Unspecified"
+    ],
+    "Home Fragrances": [
+      "Reed Diffusers",
+      "Room Spray",
+      "Scented Candles"
+    ],
+    "Lighting Accessories": [
+      "Lamp Shades",
+      "Light bulbs"
+    ],
+    "Mirrors": [
+      "Standing Mirrors",
+      "Table Mirrors",
+      "Wall Mirrors"
+    ],
+    "Outdoor Decoration": [
+      "Unspecified"
+    ],
+    "Outdoor Furniture": [
+      "Garden Chairs",
+      "Garden Sets",
+      "Garden Tables",
+      "Outdoor Cushions",
+      "Outdoor Pouffes",
+      "Outdoor Stools & Benches"
+    ],
+    "Pet Accessories": [
+      "Pet Beds"
+    ],
+    "Photo Frames": [
+      "Photo Frames",
+      "Photo Holders"
+    ],
+    "Rugs": [
+      "Rugs"
+    ],
+    "Serveware": [
+      "Cake & Serving Stands",
+      "Serving Boards",
+      "Serving Dishes",
+      "Teapots & Accessories",
+      "Trays"
+    ],
+    "Sofas & Armchairs": [
+      "4 Seater Sofas",
+      "Armchairs",
+      "Modular Sofas",
+      "Pouffes & Beanbags",
+      "Sofa & Armchair Covers"
+    ],
+    "Soft Toys": [
+      "Unspecified"
+    ],
+    "Storage": [
+      "Bar Cabinets",
+      "Bedside Tables",
+      "Bookcases",
+      "Buffets",
+      "Cabinets & Sideboards",
+      "Chests of Drawers",
+      "Folding Screens & Room Dividers",
+      "Ladder Shelves",
+      "Shelving Units",
+      "TV Stands",
+      "Trolleys",
+      "Wall Shelves",
+      "Wine storage"
+    ],
+    "Table & Kitchen Accessories": [
+      "Cooking Utensils",
+      "Kitchen & Table Linen",
+      "Placemats",
+      "Storage Jars",
+      "Vinegar, Oil & Spices"
+    ],
+    "Table & Kitchen Linen": [
+      "Placemats"
+    ],
+    "Tables": [
+      "Bar Tables",
+      "Coffee Tables",
+      "Console Tables",
+      "Dining Tables",
+      "Pedestals",
+      "Side Tables"
+    ],
+    "Unspecified": [
+      "Unspecified"
+    ],
+    "Wall Decoration": [
+      "Framed Pictures",
+      "Heads & Masks",
+      "Paintings",
+      "Prints & Posters",
+      "Quotes Wall Art",
+      "Unspecified",
+      "Wall Objects"
+    ],
+    "Wall Lamps": [
+      "Unspecified"
+    ],
+    "Wine & Bar Accessories": [
+      "Coasters",
+      "Decanters & Bottles",
+      "Drink Dispensers",
+      "Ice Buckets",
+      "Wine Accessories"
+    ]
+  },
+  "detail_to_level4": {
+    "4 Seater Sofas": [
+      "Unspecified"
+    ],
+    "Armchairs": [
+      "Unspecified"
+    ],
+    "Bags": [
+      "Unspecified"
+    ],
+    "Bar Cabinets": [
+      "Unspecified"
+    ],
+    "Bar Glasses": [
+      "Unspecified"
+    ],
+    "Bar Stools": [
+      "Unspecified"
+    ],
+    "Bar Tables": [
+      "Unspecified"
+    ],
+    "Bath Towels": [
+      "Unspecified"
+    ],
+    "Bedside Tables": [
+      "Unspecified"
+    ],
+    "Benches": [
+      "Unspecified"
+    ],
+    "Bird Houses & Cages": [
+      "Unspecified"
+    ],
+    "Bookcases": [
+      "Unspecified"
+    ],
+    "Bowls": [
+      "Unspecified"
+    ],
+    "Buffets": [
+      "Unspecified"
+    ],
+    "Cabinets & Sideboards": [
+      "Unspecified"
+    ],
+    "Cake & Serving Stands": [
+      "Unspecified"
+    ],
+    "Candle Snuffers": [
+      "Unspecified"
+    ],
+    "Candles": [
+      "Unspecified"
+    ],
+    "Candlesticks": [
+      "Unspecified"
+    ],
+    "Champagne Glasses": [
+      "Unspecified"
+    ],
+    "Chests of Drawers": [
+      "Unspecified"
+    ],
+    "Coasters": [
+      "Unspecified"
+    ],
+    "Coat Racks": [
+      "Unspecified"
+    ],
+    "Coffee Tables": [
+      "Unspecified"
+    ],
+    "Console Tables": [
+      "Unspecified"
+    ],
+    "Cooking Utensils": [
+      "Unspecified"
+    ],
+    "Curtains": [
+      "Unspecified"
+    ],
+    "Cushions & Cushion Covers": [
+      "Unspecified"
+    ],
+    "Decanters & Bottles": [
+      "Unspecified"
+    ],
+    "Decorative Lighting": [
+      "Unspecified"
+    ],
+    "Decorative Objects": [
+      "Decorative Bells",
+      "Decorative Bottles",
+      "Decorative Cones",
+      "Decorative Letters & Numbers",
+      "Decorative Trays",
+      "Decorative Trees",
+      "Objects",
+      "Paperweights",
+      "Unspecified"
+    ],
+    "Dining Chairs": [
+      "Unspecified"
+    ],
+    "Dining Tables": [
+      "Unspecified"
+    ],
+    "Drink Dispensers": [
+      "Unspecified"
+    ],
+    "Drinking Glasses": [
+      "Unspecified"
+    ],
+    "Egg Cups": [
+      "Unspecified"
+    ],
+    "Figurines": [
+      "Abstract",
+      "Animals",
+      "Buddhas",
+      "Fantasy",
+      "Flowers & Plants",
+      "People",
+      "Unspecified"
+    ],
+    "Fire Pits, Braziers & Fireplaces": [
+      "Unspecified"
+    ],
+    "Floor Cushions": [
+      "Unspecified"
+    ],
+    "Floor Vases": [
+      "Unspecified"
+    ],
+    "Flower pots": [
+      "Unspecified"
+    ],
+    "Folding Screens & Room Dividers": [
+      "Unspecified"
+    ],
+    "Framed Pictures": [
+      "Unspecified"
+    ],
+    "Garden Chairs": [
+      "Unspecified"
+    ],
+    "Garden Sets": [
+      "Unspecified"
+    ],
+    "Garden Tables": [
+      "Unspecified"
+    ],
+    "Heads & Masks": [
+      "Unspecified"
+    ],
+    "Hot Water Bottles": [
+      "Unspecified"
+    ],
+    "Hurricane Lights & Lanterns": [
+      "Unspecified"
+    ],
+    "Ice Buckets": [
+      "Unspecified"
+    ],
+    "Jars and accessories": [
+      "Unspecified"
+    ],
+    "Jewellery Boxes": [
+      "Unspecified"
+    ],
+    "Kitchen & Table Linen": [
+      "Unspecified"
+    ],
+    "LED Candles": [
+      "Unspecified"
+    ],
+    "Ladder Shelves": [
+      "Unspecified"
+    ],
+    "Lamp Shades": [
+      "Unspecified"
+    ],
+    "Light bulbs": [
+      "Unspecified"
+    ],
+    "Modular Sofas": [
+      "Unspecified"
+    ],
+    "Mugs": [
+      "Unspecified"
+    ],
+    "Office Chairs": [
+      "Unspecified"
+    ],
+    "Other": [
+      "Bookends",
+      "Doorstoppers",
+      "Garlands & hangers",
+      "Other",
+      "Piggy Banks",
+      "Unspecified",
+      "Wreath"
+    ],
+    "Outdoor Cushions": [
+      "Unspecified"
+    ],
+    "Outdoor Pouffes": [
+      "Unspecified"
+    ],
+    "Outdoor Stools & Benches": [
+      "Unspecified"
+    ],
+    "Paintings": [
+      "Unspecified"
+    ],
+    "Parasols": [
+      "Unspecified"
+    ],
+    "Pedestals": [
+      "Unspecified"
+    ],
+    "Pet Beds": [
+      "Unspecified"
+    ],
+    "Photo Frames": [
+      "Unspecified"
+    ],
+    "Photo Holders": [
+      "Unspecified"
+    ],
+    "Placemats": [
+      "Unspecified"
+    ],
+    "Plates": [
+      "Unspecified"
+    ],
+    "Pouffes & Beanbags": [
+      "Unspecified"
+    ],
+    "Prints & Posters": [
+      "Unspecified"
+    ],
+    "Quotes Wall Art": [
+      "Unspecified"
+    ],
+    "Reed Diffusers": [
+      "Unspecified"
+    ],
+    "Room Spray": [
+      "Unspecified"
+    ],
+    "Rugs": [
+      "Unspecified"
+    ],
+    "Salad Servers": [
+      "Unspecified"
+    ],
+    "Scented Candles": [
+      "Unspecified"
+    ],
+    "Serving Boards": [
+      "Unspecified"
+    ],
+    "Serving Bowls": [
+      "Unspecified"
+    ],
+    "Serving Dishes": [
+      "Unspecified"
+    ],
+    "Shelving Units": [
+      "Unspecified"
+    ],
+    "Side Tables": [
+      "Unspecified"
+    ],
+    "Sofa & Armchair Covers": [
+      "Unspecified"
+    ],
+    "Soliflores": [
+      "Unspecified"
+    ],
+    "Standing Mirrors": [
+      "Unspecified"
+    ],
+    "Stools": [
+      "Unspecified"
+    ],
+    "Storage Baskets": [
+      "Unspecified"
+    ],
+    "Storage Boxes": [
+      "Unspecified"
+    ],
+    "Storage Jars": [
+      "Unspecified"
+    ],
+    "TV Stands": [
+      "Unspecified"
+    ],
+    "Table Clocks": [
+      "Unspecified"
+    ],
+    "Table Mirrors": [
+      "Unspecified"
+    ],
+    "Tealight Holders": [
+      "Unspecified"
+    ],
+    "Teapots & Accessories": [
+      "Unspecified"
+    ],
+    "Trays": [
+      "Unspecified"
+    ],
+    "Trolleys": [
+      "Unspecified"
+    ],
+    "Unspecified": [
+      "Unspecified"
+    ],
+    "Vases": [
+      "Unspecified"
+    ],
+    "Vinegar, Oil & Spices": [
+      "Unspecified"
+    ],
+    "Wall Clocks": [
+      "Unspecified"
+    ],
+    "Wall Mirrors": [
+      "Unspecified"
+    ],
+    "Wall Objects": [
+      "Unspecified"
+    ],
+    "Wall Shelves": [
+      "Unspecified"
+    ],
+    "Wine Accessories": [
+      "Unspecified"
+    ],
+    "Wine Glasses": [
+      "Unspecified"
+    ],
+    "Wine storage": [
+      "Unspecified"
+    ],
+    "With Vase": [
+      "Unspecified"
+    ]
+  }
+}
