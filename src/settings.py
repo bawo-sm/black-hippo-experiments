@@ -1,0 +1,2 @@
+HOME_ENDPOINT = "/"
+CLASSIFY_ITEMS_ENDPOINT = "/classiffy_items"
