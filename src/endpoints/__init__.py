@@ -1,1 +1,1 @@
-from .classify_items_endpoint import ClassifyItemsEndpoint
+from .sim_search_classification import SimilaritySearchClassification
