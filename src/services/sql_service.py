@@ -1,9 +1,8 @@
-from typing import Generator
 from datetime import datetime, UTC
 from sqlalchemy import create_engine, update, select
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.orm import sessionmaker
 from src.common.utils import get_env_variable
-from src.common.db_schema import SQLItem, SQLTaskStatus, TaskEnum, TaskStatusEnum
+from src.common.db_schema import SQLItem, SQLTaskStatus, TaskStatusEnum
 
 
 

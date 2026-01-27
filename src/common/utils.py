@@ -26,7 +26,3 @@ def get_env_variable(name: str) -> Any:
         raise KeyError(
             f"\nThere is no variable {name} in the current environment.\nCurrent variables are:\n{listed_names}"
         )
-
-
-def set_task_status():
-    SQL

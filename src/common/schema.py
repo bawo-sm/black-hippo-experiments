@@ -34,6 +34,11 @@ class SimSearchClassificationRequest(BaseModel):
     item_ids: list[int]
 
 
+class SimSearchClassificationResponse(BaseModel):
+    message: str
+    task_id: str
+
+
 class GetStatusRequest(BaseModel):
     task_id: str | None = None
 

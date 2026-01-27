@@ -3,7 +3,7 @@ from uuid import uuid4
 from fastapi import FastAPI, BackgroundTasks
 from sentence_transformers import SentenceTransformer
 from src.ai.ai_search_connector import AISearchConnector
-from src.common.schema import SimSearchClassificationRequest, GetStatusRequest, GetStatusResponse
+from src.common.schema import SimSearchClassificationRequest, SimSearchClassificationResponse, GetStatusRequest, GetStatusResponse
 from src.common.db_schema import SQLTaskStatus, TaskEnum, TaskStatusEnum
 from src.common.utils import get_env_variable
 from src.services import IdentityService, SQLService
@@ -28,7 +28,7 @@ async def endpoint_get_status(order: GetStatusRequest):
     return GetTaskStatus().run(order.task_id)
 
 
-@app.post(SIM_SEARCH_CLASSIFICATION_URL)
+@app.post(SIM_SEARCH_CLASSIFICATION_URL, response_model=SimSearchClassificationResponse)
 async def endpoint_sim_search_classification_items(
     order: SimSearchClassificationRequest,
     background_tasks: BackgroundTasks
@@ -65,6 +65,7 @@ async def endpoint_sim_search_classification_items(
 
     background_tasks.add_task(task)
 
-    return {
-        "message": f"Similarity Search classification is running. See task {task_id}"
-    }
+    return SimSearchClassificationResponse(
+        message=f"Similarity Search classification is running",
+        task_id=task_id
+    )
