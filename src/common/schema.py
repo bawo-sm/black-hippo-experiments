@@ -1,4 +1,6 @@
 from pydantic import BaseModel
+from datetime import datetime
+from src.common.enums import TaskStatusEnum, TaskEnum
 
 
 class Classification(BaseModel):
@@ -10,13 +12,12 @@ class Classification(BaseModel):
 
 class SimSearchDocument(BaseModel):
     doc_id: int
-    image_link: str
     season: str | None = None
     supplier_name: str | None = None
     supplier_reference_description: str | None = None
     materials: str | None = None
     image_description: str | None = None
-    embedding: list[float] | None
+    embedding: list[float] | None = None
     predicted_class: Classification | None = None
     
     def product_representation(self):
@@ -30,4 +31,20 @@ class SimSearchDocument(BaseModel):
 
 
 class SimSearchClassificationRequest(BaseModel):
-    documents: list[SimSearchDocument]
+    item_ids: list[int]
+
+
+class GetStatusRequest(BaseModel):
+    task_id: str | None = None
+
+
+class TaskStatus(BaseModel):
+    task_uuid: str
+    task: TaskEnum
+    status: TaskStatusEnum
+    info: str | None = None
+    updated_at: datetime
+
+
+class GetStatusResponse(BaseModel):
+    tasks: list[TaskStatus]

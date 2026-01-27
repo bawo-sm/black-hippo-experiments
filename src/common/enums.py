@@ -1,10 +1,21 @@
-from enums import Enum
+from enum import Enum
 
 
 class AzureClientEnum(str, Enum):
     blob = "blob"
     event_grid = "event_grid"
     identity = "identity"
-    event_grid = "event_grid"
     event_bus = "evnt_bus"
     sql = "sql"
+
+
+class TaskStatusEnum(str, Enum):
+    in_progress = "in_progress"
+    success = "success"
+    error = "error"
+
+
+class TaskEnum(str, Enum):
+    classification = "classification"
+    color_recognition = "color_recognition"
+    hs_code = "hs_code"

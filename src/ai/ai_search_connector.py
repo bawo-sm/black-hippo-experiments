@@ -8,8 +8,7 @@ from azure.search.documents.indexes.models import (
     SearchableField,
     VectorSearch,
     VectorSearchAlgorithmConfiguration,
-    HnswParameters,
-    VectorField
+    HnswParameters
 )
 
 
@@ -114,7 +113,7 @@ class AISearchConnector:
                     name="level4",
                     type="Edm.String"
                 ),
-                VectorField(
+                SearchableField(
                     name=self.embedding_field,
                     vector_search_dimensions=self.embedding_size,
                     vector_search_configuration="vector-config"
