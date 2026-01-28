@@ -16,13 +16,11 @@ class BlobService():
             credential=get_env_variable('STORAGE_ACCOUNT_KEY')
         )
         try:
-            info = self.__blob_service_client.get_account_information()
+            self.__blob_service_client.get_account_information()
             logger.info("Successfully connected.")
         except ClientAuthenticationError as e:
             logger.error("Connection refused")
             raise e
-
-        # self.__container_client = self.__blob_service_client.get_container_client()
     
     def get_containers_names(self) -> list[str]:
         return [x["name"] for x in self.__blob_service_client.list_containers()]
