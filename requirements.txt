@@ -1,8 +1,17 @@
-transformers==4.57.4
-torch==2.9.1
-sentence-transformers==5.2.0
-pandas==2.3.3
-plotly==6.5.1
-ipykernel==7.1.0
-nbconvert==7.16.6
-openpyxl==3.1.5
+# azure
+azure-identity==1.25.1
+azure-storage-blob==12.28.0
+azure-servicebus==7.14.3
+azure-eventgrid==4.22.0
+azure-ai-agents==1.1.0
+azure-ai-projects==1.0.0
+azure-search-documents==11.6.0
+
+# app framework
+fastapi==0.128.0
+uvicorn==0.40.0
+
+# other
+sqlalchemy==2.0.46
+python-dotenv==1.2.1
+pymysql==1.1.2
