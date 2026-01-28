@@ -9,5 +9,10 @@ SIM_SEARCH_INDEX_NAME = "reference_data"
 RESULTS_INDEX_NAME = "results_data"
 
 
+# storage account
+IMAGES_CONTAINER = "images"
+
+
 # other
 EMBEDDING_MODEL = "sentence-transformers/all-mpnet-base-v2"
+LLM = "gpt-4o-mini"
