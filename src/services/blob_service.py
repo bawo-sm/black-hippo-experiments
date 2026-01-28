@@ -26,30 +26,26 @@ class BlobService():
         return [x["name"] for x in self.__blob_service_client.list_containers()]
     
     def get_image_url(self, image_name: str):
-        self.check_file_exists(IMAGES_CONTAINER, image_name)
+        assert self.check_file_exists(IMAGES_CONTAINER, image_name)
         return (
             f"https://{get_env_variable('ACCOUNT_NAME')}.blob.core.windows.net"
             f"/{IMAGES_CONTAINER}/{image_name}?{get_env_variable('STORAGE_ACCOUNT_KEY')}"
         )
     
     def check_file_exists(self, container_name: str, file_name: str):
-        container_client = self.__blob_service_client.get_container_client(container_name)
-
-        exists = False
-        for blob in container_client.list_blobs():
-            if blob.name == file_name:
-                exists = True
-                break
-        
-        assert exists
+        blob_client = self.__blob_service_client.get_blob_client(
+            container=container_name,
+            blob=file_name
+        )        
+        return blob_client.exists()
 
     def number_of_blobs(self, container_name: str):
         container_client = self.__blob_service_client.get_container_client(container_name)
         return len([x for x in container_client.list_blobs()])
 
-    def get_blobs_names(self, container_name: str):
+    def get_blobs(self, container_name: str):
         container_client = self.__blob_service_client.get_container_client(container_name)
-        return [x["name"] for x in container_client.list_blobs()]
+        return [x for x in container_client.list_blobs()]
 
     def upload_file(
             self, 
