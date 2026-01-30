@@ -1,8 +1,8 @@
 from datetime import datetime, UTC
-from sqlalchemy import create_engine, update, select
+from sqlalchemy import create_engine, update, select, text
 from sqlalchemy.orm import sessionmaker
 from src.common.utils import get_env_variable
-from src.common.db_schema import SQLItem, SQLTaskStatus, TaskStatusEnum
+from src.common.db_schema import SQLItem, SQLTaskStatus, TaskStatusEnum, Base
 
 
 
@@ -51,25 +51,44 @@ class SQLService:
             results = session.execute(select(SQLTaskStatus)).all()
         return results
 
-    # database engine methods
-    @staticmethod
-    def get_database_url() -> str:
-        db_user = get_env_variable("DB_USERNAME")
-        db_password = get_env_variable("DB_PASSWORD")
-        db_host = get_env_variable("DB_HOST_WRITE")
-        db_port = get_env_variable("DB_PORT")
-        db_name = get_env_variable("DB_DATABASE")
-
-        uri = f"mysql+pymysql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
-        return uri
-    
+    # database engine methods    
     @staticmethod
     def get_engine():
-        return create_engine(SQLService.get_database_url(), echo=False)
+        connection_string = (
+            "mssql+pyodbc://{username}:{password}@{server}:{port}/{database}"
+            "?driver=ODBC+Driver+18+for+SQL+Server"
+            "&Encrypt=yes"
+            "&TrustServerCertificate=no"
+            "&Connection Timeout=30"
+        ).format(
+            username=get_env_variable("SQL_USERNAME"),
+            password=get_env_variable("SQL_PASSWORD"),
+            server=get_env_variable("SQL_ENDPOINT"),
+            port=get_env_variable("SQL_PORT"),
+            database=get_env_variable("SQL_DATABASE"),
+        )
+        return create_engine(connection_string, echo=False)
 
     @staticmethod
     def get_session():
         return sessionmaker(bind=SQLService.get_engine())()
+
+    @staticmethod
+    def create_tables():
+        Base.metadata.create_all(SQLService.get_engine())
+    
+    @staticmethod
+    def drop_table(TableSchema):
+        TableSchema.__table__.drop(SQLService.get_engine())
+
+    @staticmethod
+    def list_tables():
+        rows = []
+        with SQLService.get_engine().connect() as conn:
+            result = conn.execute(text("SELECT * FROM information_schema.tables;"))
+            for row in result:
+                rows.append(row)
+        return rows
 
     @staticmethod
     def trigger_insert(model):

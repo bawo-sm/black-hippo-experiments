@@ -1,3 +1,4 @@
+import base64
 from azure.storage.blob import BlobServiceClient, ContentSettings
 from azure.core.exceptions import ClientAuthenticationError
 from logging import getLogger
@@ -32,6 +33,14 @@ class BlobService():
             f"/{IMAGES_CONTAINER}/{image_name}?{get_env_variable('STORAGE_ACCOUNT_KEY')}"
         )
     
+    def get_image_string(self, blob_name: str, container: str = IMAGES_CONTAINER) -> str:
+        blob_client = self.__blob_service_client.get_blob_client(
+            container=container,
+            blob=blob_name
+        )
+        image_bytes = blob_client.download_blob().readall()
+        return base64.b64encode(image_bytes).decode("utf-8")
+
     def check_file_exists(self, container_name: str, file_name: str):
         blob_client = self.__blob_service_client.get_blob_client(
             container=container_name,
