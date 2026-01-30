@@ -116,3 +116,21 @@ class SQLItem(Base):
             f"level4={self.level4}, colors={self.colors}, hs_code={self.hs_code}"
             f"created_at={self.created_at}, updated_at={self.updated_at})>"
         )
+    
+    def to_dict(self):
+        return dict(
+            id=self.id,
+            origin_id=self.origin_id,
+            season=self.season,
+            supplier_name=self.supplier_name,
+            supplier_reference_description=self.supplier_reference_description,
+            materials=self.materials,
+            main=self.main,
+            sub=self.sub,
+            detail=self.detail,
+            level4=self.level4,
+            colors=self.colors,
+            hs_code=self.hs_code,
+            created_at=self.created_at,
+            updated_at=self.updated_at,
+        )

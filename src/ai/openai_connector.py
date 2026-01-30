@@ -1,6 +1,4 @@
-import json
 import requests
-from pydantic import BaseModel
 from logging import getLogger
 from src.common.utils import get_env_variable
 

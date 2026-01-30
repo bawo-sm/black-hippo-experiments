@@ -3,6 +3,23 @@ from datetime import datetime
 from src.common.enums import TaskStatusEnum, TaskEnum
 
 
+class Item(BaseModel):
+    id: int
+    origin_id: int
+    season: str
+    supplier_name: str
+    supplier_reference_description: str
+    materials: str | None
+    main: str | None
+    sub: str | None
+    detail: str | None
+    level4: str | None
+    colors: str | None
+    hs_code: str | None
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
+
+
 class Classification(BaseModel):
     main: str | None
     sub: str | None
@@ -53,3 +70,22 @@ class TaskStatus(BaseModel):
 
 class GetStatusResponse(BaseModel):
     tasks: list[TaskStatus]
+
+
+class QdrantRecord(BaseModel):
+    metadata: dict[str, str | int | float | bool]
+    embedding: list[float]
+
+
+class CheckItemsRequest(BaseModel):
+    items_ids: list[int]
+
+
+class CheckedItem(BaseModel):
+    item_id: int
+    in_sql_db: bool
+    in_blob_storage: bool
+
+
+class CheckItemsResponse(BaseModel):
+    items: list[CheckedItem]
