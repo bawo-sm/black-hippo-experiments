@@ -1,3 +1,4 @@
+import json
 from pydantic import BaseModel, Field
 from src.ai.openai_connector import OpenAIConnector
 from src.ai.prompts.prompts_manager import prompts_manager
@@ -22,6 +23,6 @@ def describe_image(image_url: str) -> AnswerSchema:
     raw_answer = OpenAIConnector().request_wih_function_calling(
         input_messages=messages,
         schema=AnswerSchema,
-        llm=LLM
     )
+    raw_answer = json.loads(raw_answer.json()["choices"][0]["message"]["function_call"]["arguments"])
     return AnswerSchema(**raw_answer)
