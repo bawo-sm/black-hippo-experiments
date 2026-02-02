@@ -16,6 +16,7 @@ class TaskStatusEnum(str, Enum):
 
 
 class TaskEnum(str, Enum):
+    create_reference_data = "create_reference_data"
     classification = "classification"
     color_recognition = "color_recognition"
     hs_code = "hs_code"

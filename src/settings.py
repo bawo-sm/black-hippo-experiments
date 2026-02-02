@@ -4,6 +4,8 @@ SIM_SEARCH_CLASSIFICATION_URL = "/sim_search_classification"
 GET_STATUS_URL = "/get_status"
 GET_ITEMS_URL = "/get_items"
 CHECK_ITEMS_URL = "/check_items"
+CREATE_REFERENCE_DATA_URL = "/create_reference_data"
+DELETE_REFERENCE_DATA_URL = "/delete_reference_data"
 
 
 # vector db qdrant

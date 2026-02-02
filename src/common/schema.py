@@ -89,3 +89,60 @@ class CheckedItem(BaseModel):
 
 class CheckItemsResponse(BaseModel):
     items: list[CheckedItem]
+
+
+class ReferenceItem(BaseModel):
+    id: int
+    season: str
+    supplier_name: str
+    supplier_reference_description: str
+    width: float | None = None
+    height: float | None = None
+    length: float | None = None
+    weight: float | None = None
+    materials: str | None
+    main: str | None
+    sub: str | None
+    detail: str | None
+    level4: str | None
+    colors: str | None
+
+    def metadata(self) -> dict:
+        return dict(
+            season=self.season,
+            supplier_name=self.supplier_name,
+            supplier_reference_description=self.supplier_reference_description,
+            materials=self.materials if self.materials else "Unspecified",
+            width=self.width if self.width else "Unspecified",
+            height=self.height if self.height else "Unspecified",
+            length=self.length if self.length else "Unspecified",
+            weight=self.weight if self.weight else "Unspecified",
+            main=self.main if self.main else "Unspecified",
+            sub=self.sub if self.sub else "Unspecified",
+            detail=self.detail if self.detail else "Unspecified",
+            level4=self.level4 if self.level4 else "Unspecified",
+        )
+
+    def text(self):
+        return f"""
+        season = {self.season},
+        supplier_name = {self.supplier_name},
+        supplier_reference_description = {self.supplier_reference_description},
+        materials = {self.materials if self.materials else "Unspecified"},
+        width = {self.width if self.width else "Unspecified"},
+        height = {self.height if self.height else "Unspecified"},
+        length = {self.length if self.length else "Unspecified"},
+        weight = {self.weight if self.weight else "Unspecified"},
+        main = {self.main if self.main else "Unspecified"},
+        sub = {self.sub if self.sub else "Unspecified"},
+        detail = {self.detail if self.detail else "Unspecified"},
+        level4 = {self.level4 if self.level4 else "Unspecified"},
+        """
+
+class CreateReferenceDataRequest(BaseModel):
+    items: list[ReferenceItem]
+
+
+class CreateReferenceDataResponse(BaseModel):
+    message: str
+    task_id: str
