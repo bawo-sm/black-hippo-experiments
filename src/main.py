@@ -1,18 +1,29 @@
 from dotenv import load_dotenv
-from uuid import uuid4
 from fastapi import FastAPI, BackgroundTasks
 from sentence_transformers import SentenceTransformer
-from src.ai.ai_search_connector import AISearchConnector
-from src.common.schema import SimSearchClassificationRequest, SimSearchClassificationResponse, GetStatusRequest, GetStatusResponse
-from src.common.db_schema import SQLTaskStatus, TaskEnum, TaskStatusEnum
-from src.common.utils import get_env_variable
-from src.services import IdentityService, SQLService
+from logging import getLogger, basicConfig, INFO
+from src.common.schema import (
+    SimSearchClassificationRequest, 
+    SimSearchClassificationResponse, 
+    GetStatusRequest, 
+    GetStatusResponse,
+    CheckItemsResponse,
+    Item,
+    CreateReferenceDataRequest,
+    CreateReferenceDataResponse
+)
 from src.endpoints import *
 from src.settings import *
 
 
 load_dotenv(".env")
+
+basicConfig(level=INFO)
+logger = getLogger("Main")
+
+logger.info("Loading embedder")
 embedder = SentenceTransformer(EMBEDDING_MODEL)
+
 app = FastAPI(
     title="ItemsClassification"
 )
@@ -28,44 +39,40 @@ async def endpoint_get_status(order: GetStatusRequest):
     return GetTaskStatus().run(order.task_id)
 
 
+@app.post(GET_ITEMS_URL)
+async def endpoint_get_items(items_ids: list[int]) -> list[Item]:
+    return GetItems().run(items_ids)
+
+
+@app.post(CHECK_ITEMS_URL, response_model=CheckItemsResponse)
+async def endpoint_check_items(items_ids: list[int]):
+    return CheckItems().run(items_ids)
+
+
 @app.post(SIM_SEARCH_CLASSIFICATION_URL, response_model=SimSearchClassificationResponse)
 async def endpoint_sim_search_classification_items(
     order: SimSearchClassificationRequest,
     background_tasks: BackgroundTasks
 ):  
-    task_id = str(uuid4())
-    SQLService.set_task_status(
-        SQLTaskStatus(
-            task_uuid=task_id,
-            task=TaskEnum.classification,
-            status=TaskStatusEnum.in_progress
-        )
+    return SimilaritySearchClassification.endpoint(
+        embedder=embedder,
+        order=order,
+        background_tasks=background_tasks
     )
 
-    def task():
-        try:
-            creds = IdentityService.get_azure_credentials(get_env_variable("ADMIN_INDEX_SECRET_KEY"))
-            SimilaritySearchClassification().run(
-                item_ids=order.item_ids,
-                ai_search_connector=AISearchConnector(creds),
-                embedder=embedder
-            )
-        except Exception as e:
-            SQLService.update_task_status(
-                status=TaskStatusEnum.error,
-                info=str(e),
-                task_uuid=task_id
-            )
-            raise e
-        SQLService.update_task_status(
-            task_uuid=task_id,
-            status=TaskStatusEnum.success,
-            info=f"Classifeid {len(order.item_ids)} items."
-        )
 
-    background_tasks.add_task(task)
-
-    return SimSearchClassificationResponse(
-        message=f"Similarity Search classification is running",
-        task_id=task_id
+@app.put(CREATE_REFERENCE_DATA_URL, response_model=CreateReferenceDataResponse)
+async def enpoint_create_reference_data(
+    order: CreateReferenceDataRequest,
+    background_tasks: BackgroundTasks
+):
+    return ReferenceData.endpoint_create(
+        embedder=embedder,
+        order=order,
+        background_tasks=background_tasks
     )
+
+
+@app.delete(DELETE_REFERENCE_DATA_URL)
+async def enpoint_create_reference_data() -> str:
+    return ReferenceData.endpoint_delete()

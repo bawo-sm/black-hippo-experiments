@@ -2,7 +2,6 @@ import json
 from pydantic import BaseModel, Field
 from src.ai.openai_connector import OpenAIConnector
 from src.ai.prompts.prompts_manager import prompts_manager
-from src.settings import LLM
 
 
 class AnswerSchema(BaseModel):

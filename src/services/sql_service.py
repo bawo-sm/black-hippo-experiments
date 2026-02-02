@@ -1,5 +1,5 @@
 from datetime import datetime, UTC
-from sqlalchemy import create_engine, update, select, text
+from sqlalchemy import create_engine, update, select, text, exists
 from sqlalchemy.orm import sessionmaker
 from src.common.utils import get_env_variable
 from src.common.db_schema import SQLItem, SQLTaskStatus, TaskStatusEnum, Base
@@ -16,6 +16,16 @@ class SQLService:
         session.commit()
 
     @staticmethod
+    def check_item_exists(item_id: int) -> bool:
+        records = (
+            SQLService.get_session()
+            .query(SQLItem)
+            .filter(SQLItem.origin_id == item_id)
+            .all()
+        )
+        return not (records is None)
+
+    @staticmethod
     def load_items_by_origin_id(ids: list[int]) -> list[SQLItem]:
         return (
             SQLService.get_session()
@@ -23,6 +33,15 @@ class SQLService:
             .filter(SQLItem.origin_id.in_(ids))
             .all()
         )
+
+    @staticmethod
+    def load_items_ids() -> list[int]:
+        records = (
+            SQLService.get_session()
+            .query(SQLItem)
+            .all()
+        )
+        return [x.origin_id for x in records]
     
     @staticmethod
     def set_task_status(item: SQLTaskStatus):
@@ -37,6 +56,17 @@ class SQLService:
             update(SQLTaskStatus)
             .where(SQLTaskStatus.task_uuid == task_uuid)
             .values(status=status, info=info)
+        )
+        session.execute(stmt)
+        session.commit()
+
+    @staticmethod
+    def update_item(origin_id: int, kwargs: dict):
+        session = SQLService.get_session()
+        stmt = (
+            update(SQLItem)
+            .where(SQLItem.origin_id == origin_id)
+            .values(**kwargs)
         )
         session.execute(stmt)
         session.commit()
