@@ -46,36 +46,55 @@ class DetailClassifier(AbstractToolLessAgent):
         elif has_unspecified:
             unspecified_note = "\n\nNote: Only use 'Unspecified' if none of the specific categories above match. Prefer specific categories when possible."
         
-        return f"""Main: {state.main}, Sub: {state.sub}. Classify into ONE detail category. Return ONLY valid JSON, no other text.
+        return f"""You are an assistant that helps with product categorization. Products are typically related to house, home, and garden items.
 
-Valid detail categories for "{state.sub}": {detail_values_str}{unspecified_note}
+TASK:
+1. Analyze the given product (described in the user message, which may include an image and/or product details).
+2. Find the best detail category from the available categories below, given the main and sub categories that were already selected.
 
-Return JSON format: {{"detail": "category_name"}}
+HIGHER-CLASS CONTEXT:
+The general classification is: {state.main}/{state.sub}
+You are now selecting the detail category within this hierarchy.
 
-You MUST select from the list above. Choose the most specific category that matches."""
+AVAILABLE DETAIL CATEGORIES FOR "{state.sub}":
+{detail_values_str}{unspecified_note}
+
+OUTPUT FORMAT:
+Return ONLY valid JSON, no other text. Use this format:
+{{"detail": "category_name"}}
+
+You MUST select from the categories listed above. Choose the most specific category that matches the product."""
     
     def _build_user_prompt(self, state: ClassificationState) -> str:
         """Build user prompt for detail classification."""
-        # Build item data context if available
-        item_data_parts = []
+        # Build structured product information
+        product_parts = []
         if state.supplier_name:
-            item_data_parts.append(f"Supplier: {state.supplier_name}")
+            product_parts.append(f"Supplier name = {state.supplier_name}")
         if state.supplier_reference_description:
-            item_data_parts.append(f"Description: {state.supplier_reference_description}")
+            product_parts.append(f"Product name = {state.supplier_reference_description}")
         if state.materials:
-            item_data_parts.append(f"Materials: {state.materials}")
+            product_parts.append(f"Materials = {state.materials}")
         
-        item_data_str = ", ".join(item_data_parts) if item_data_parts else None
+        product_info = "\n".join(product_parts) if product_parts else "Product information not available"
         
         # Build prompt based on what's available
-        if state.image_data and item_data_str:
-            return f"Main: {state.main}, Sub: {state.sub}. Classify detail category. Item details: {item_data_str}. Return only JSON: {{\"detail\": \"category\"}}"
-        elif state.image_data:
-            return f"Main: {state.main}, Sub: {state.sub}. Classify detail category. Return only JSON: {{\"detail\": \"category\"}}"
-        elif item_data_str:
-            return f"Main: {state.main}, Sub: {state.sub}. Classify detail category based on item details: {item_data_str}. Return only JSON: {{\"detail\": \"category\"}}"
+        if state.image_data:
+            if product_parts:
+                return f"""PRODUCT INFORMATION:
+{product_info}
+
+The classification so far is: {state.main}/{state.sub}
+Analyze the product (image provided above) and classify it into the detail category. Return only JSON: {{"detail": "category_name"}}"""
+            else:
+                return f"""The classification so far is: {state.main}/{state.sub}
+Analyze the product image (provided above) and classify it into the detail category. Return only JSON: {{"detail": "category_name"}}"""
         else:
-            return f"Main: {state.main}, Sub: {state.sub}. Classify detail category. Return only JSON: {{\"detail\": \"category\"}}"
+            return f"""PRODUCT INFORMATION:
+{product_info}
+
+The classification so far is: {state.main}/{state.sub}
+Analyze the product information above and classify it into the detail category. Return only JSON: {{"detail": "category_name"}}"""
     
     def _process_output(self, output: Any, state: ClassificationState) -> ClassificationState:
         """Process detail classification output and update state."""
@@ -93,42 +112,34 @@ You MUST select from the list above. Choose the most specific category that matc
             if json_match:
                 try:
                     parsed = json.loads(json_match.group())
-                    detail_value = parsed.get("detail", "Unspecified")
+                    detail_value = parsed.get("detail", None)
                 except:
-                    detail_value = "Unspecified"
+                    detail_value = None
             else:
-                detail_value = "Unspecified"
+                detail_value = None
         else:
-            detail_value = getattr(output, 'detail', 'Unspecified')
+            detail_value = getattr(output, 'detail', None)
         
         # Get valid detail values for the sub category
         valid_detail_values = get_valid_detail_values(state.sub)
         
-        # If sub is Unspecified, allow any detail value
-        if state.sub == "Unspecified":
-            allowed_values = self.all_detail_values
-        else:
-            # Filter to only valid values
-            allowed_values = filter_values_by_hierarchy(self.all_detail_values, valid_detail_values)
-            if not allowed_values:
-                allowed_values = self.all_detail_values  # Fallback to all if no mapping found
+        # Filter to only valid values
+        allowed_values = filter_values_by_hierarchy(self.all_detail_values, valid_detail_values)
+        if not allowed_values:
+            allowed_values = self.all_detail_values  # Fallback to all if no mapping found
         
         # Validate that the output is in the allowed values
-        # Special case: "Unspecified" is always allowed as a fallback, even if not in hierarchy mapping
-        if detail_value == "Unspecified":
-            # Always allow "Unspecified" - it's a valid fallback category
-            pass
-        elif detail_value not in allowed_values:
-            # For other invalid values, log error and fall back to first valid value or "Unspecified"
-            state.add_error(
-                f"Invalid detail value: {detail_value} for sub: {state.sub}. "
-                f"Must be one of {allowed_values}. Using fallback."
-            )
-            # Try to use first valid value, otherwise use "Unspecified"
+        if not detail_value or detail_value not in allowed_values:
+            if detail_value:
+                state.add_error(
+                    f"Invalid detail value: {detail_value} for sub: {state.sub}. "
+                    f"Must be one of {allowed_values}. Using fallback."
+                )
+            # Use first valid value as fallback
             if allowed_values:
                 detail_value = allowed_values[0]
             else:
-                detail_value = "Unspecified"
+                detail_value = None
         
         state.detail = detail_value
         state.add_classification_step(

@@ -8,7 +8,8 @@ class Settings(BaseSettings):
     
     # OpenRouter API Configuration
     openrouter_api_key: str = ""
-    openrouter_model: str = "openai/gpt-4o-mini"  # Vision-capable model
+    openrouter_model: str = "openai/gpt-4o-mini"  # Fast model for secondary tasks
+    openrouter_vision_model: str = "openai/gpt-4o"  # Strong vision model for description + primary color
     openrouter_base_url: str = "https://openrouter.ai/api/v1"
     
     # Retry Configuration

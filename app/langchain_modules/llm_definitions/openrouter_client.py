@@ -1,5 +1,5 @@
 """OpenRouter LLM client with LangChain integration."""
-from typing import Optional
+from typing import Optional, Tuple
 from langchain_openai import ChatOpenAI
 from langchain_core.language_models import BaseChatModel
 
@@ -43,4 +43,29 @@ def create_openrouter_client(
     client.model_name = model_name
     
     return client
+
+
+def create_dual_clients(
+    temperature: float = 0.0,
+    max_retries: int = 3
+) -> Tuple[BaseChatModel, BaseChatModel]:
+    """
+    Create a pair of OpenRouter clients: a strong vision model and a fast model.
+    
+    Returns:
+        Tuple of (vision_llm, fast_llm):
+        - vision_llm: gpt-4o for description + primary color (vision-critical)
+        - fast_llm: gpt-4o-mini for multi-gate, secondary colors, neutral verify
+    """
+    vision_llm = create_openrouter_client(
+        model=settings.openrouter_vision_model,
+        temperature=temperature,
+        max_retries=max_retries,
+    )
+    fast_llm = create_openrouter_client(
+        model=settings.openrouter_model,
+        temperature=temperature,
+        max_retries=max_retries,
+    )
+    return vision_llm, fast_llm
 

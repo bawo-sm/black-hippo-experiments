@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api_routes.classificationRoutes import router
+from app.api_routes.colorRoutes import router as color_router
 
 # Create FastAPI app
 app = FastAPI(
@@ -22,6 +23,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(router)
+app.include_router(color_router)
 
 
 @app.get("/")
@@ -32,7 +34,10 @@ async def root():
         "version": "1.0.0",
         "endpoints": {
             "classify": "/api/classify",
-            "health": "/api/health"
+            "classify_colors": "/api/classify-colors",
+            "health": "/api/health",
+            "color_health": "/api/color-health"
         }
     }
+
 
